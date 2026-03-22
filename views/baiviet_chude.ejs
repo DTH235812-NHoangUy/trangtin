@@ -5,9 +5,9 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<meta name="description" content="Trang tin điện tử nhiều người xem nhất vũ trụ." />
-	<meta name="author" content="Nguyễn Hoàng Tùng" />
+	<meta name="author" content="Nguyễn Hoàng Uy" />
 	<title><%= title %> - Trang tin điện tử</title>
-	<link href="http://127.0.0.1:3000/css/app.css" rel="stylesheet" />
+	<link href="/css/app.css?v=3" rel="stylesheet" />
 </head>
 <body>
 	<header>
@@ -32,19 +32,11 @@
 				<div class="collapse navbar-collapse order-4 order-md-4" id="navbar-right">
 					<ul class="navbar-nav ms-auto">
 						<% if(typeof session === "undefined" || !session.MaNguoiDung) { %>
-							<li class="nav-item">
-								<a class="nav-link" href="/dangky">Đăng ký</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="/dangnhap">Đăng nhập</a>
-							</li>
+							<li class="nav-item"><a class="nav-link" href="/dangky">Đăng ký</a></li>
+							<li class="nav-item"><a class="nav-link" href="/dangnhap">Đăng nhập</a></li>
 						<% } else { %>
-							<li class="nav-item">
-								<a class="nav-link" href="/admin">Quản lý</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="/dangxuat">Đăng xuất</a>
-							</li>
+							<li class="nav-item"><a class="nav-link" href="/admin">Quản lý</a></li>
+							<li class="nav-item"><a class="nav-link" href="/dangxuat">Đăng xuất</a></li>
 						<% } %>
 					</ul>
 					<form class="form-inline" role="search" action="/timkiem" method="post">
@@ -54,6 +46,7 @@
 			</div>
 		</nav>
 	</header>
+
 	<main class="main pt-4">
 		<div class="container">
 			<div class="row">
@@ -104,18 +97,15 @@
                     </div>
 					<nav>
 						<ul class="pagination justify-content-center">
-							<li class="page-item disabled">
-								<a class="page-link" href="#" tabindex="-1" aria-disabled="true">Về trước</a>
-							</li>
+							<li class="page-item disabled"><a class="page-link" href="#" tabindex="-1" aria-disabled="true">Về trước</a></li>
 							<li class="page-item"><a class="page-link" href="#">1</a></li>
 							<li class="page-item"><a class="page-link" href="#">2</a></li>
 							<li class="page-item"><a class="page-link" href="#">3</a></li>
-							<li class="page-item">
-								<a class="page-link" href="#">Về sau</a>
-							</li>
+							<li class="page-item"><a class="page-link" href="#">Về sau</a></li>
 						</ul>
 					</nav>
                 </div>
+
 				<div class="col-md-3 ms-auto">
 					<aside class="sidebar">
 						<div class="card mb-4">
@@ -125,6 +115,7 @@
 							</div>
 						</div>
 					</aside>
+
 					<aside class="sidebar sidebar-sticky">
 						<div class="card mb-4">
 							<div class="card-body">
@@ -134,6 +125,7 @@
 								<% }); } %>
 							</div>
 						</div>
+
 						<div class="card mb-4">
 							<div class="card-body">
 								<h4 class="card-title">Xem nhiều nhất</h4>
@@ -151,49 +143,31 @@
 			</div>
 		</div>
 	</main>
-	<div class="site-newsletter">
-		<div class="container">
-			<div class="text-center">
-				<h3 class="h4 mb-2">Đăng ký nhận tin mới nhất</h3>
-				<p class="text-muted">Tham gia bản tin hàng tháng của chúng tôi và không bao giờ bỏ lỡ những câu chuyện mới.</p>
-				<div class="row">
-					<div class="col-xs-12 col-sm-9 col-md-7 col-lg-5 ms-auto me-auto">
-						<div class="input-group mb-3 mt-3">
-							<input type="text" class="form-control" placeholder="Địa chỉ Email" aria-label="Email address" />
-							<span class="input-group-btn">
-								<button class="btn btn-secondary" type="button">Đăng ký</button>
-							</span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+
 	<div class="site-instagram">
 		<div class="action">
-			<a class="btn btn-light" href="#">
-				Theo dõi chúng tôi @ Instagram
-			</a>
+			<a class="btn btn-light" href="#">Theo dõi chúng tôi @ Instagram</a>
 		</div>
 		<div class="row g-0">
 			<div class="col-sm-6">
 				<div class="row g-0">
-					<div class="col-3"><a class="photo" href="#"><img class="img-fluid" src="http://127.0.0.1:3000/images/instagram/1.jpg" alt="" /></a></div>
-					<div class="col-3"><a class="photo" href="#"><img class="img-fluid" src="http://127.0.0.1:3000/images/instagram/2.jpg" alt="" /></a></div>
-					<div class="col-3"><a class="photo" href="#"><img class="img-fluid" src="http://127.0.0.1:3000/images/instagram/3.jpg" alt="" /></a></div>
-					<div class="col-3"><a class="photo" href="#"><img class="img-fluid" src="http://127.0.0.1:3000/images/instagram/4.jpg" alt="" /></a></div>
+					<div class="col-3"><a class="photo" href="#"><img class="img-fluid" src="/images/instagram/1.jpg" alt="" /></a></div>
+					<div class="col-3"><a class="photo" href="#"><img class="img-fluid" src="/images/instagram/2.jpg" alt="" /></a></div>
+					<div class="col-3"><a class="photo" href="#"><img class="img-fluid" src="/images/instagram/3.jpg" alt="" /></a></div>
+					<div class="col-3"><a class="photo" href="#"><img class="img-fluid" src="/images/instagram/4.jpg" alt="" /></a></div>
 				</div>
 			</div>
 			<div class="col-sm-6">
 				<div class="row g-0">
-					<div class="col-3"><a class="photo" href="#"><img class="img-fluid" src="http://127.0.0.1:3000/images/instagram/5.jpg" alt="" /></a></div>
-					<div class="col-3"><a class="photo" href="#"><img class="img-fluid" src="http://127.0.0.1:3000/images/instagram/6.jpg" alt="" /></a></div>
-					<div class="col-3"><a class="photo" href="#"><img class="img-fluid" src="http://127.0.0.1:3000/images/instagram/7.jpg" alt="" /></a></div>
-					<div class="col-3"><a class="photo" href="#"><img class="img-fluid" src="http://127.0.0.1:3000/images/instagram/8.jpg" alt="" /></a></div>
+					<div class="col-3"><a class="photo" href="#"><img class="img-fluid" src="/images/instagram/5.jpg" alt="" /></a></div>
+					<div class="col-3"><a class="photo" href="#"><img class="img-fluid" src="/images/instagram/6.jpg" alt="" /></a></div>
+					<div class="col-3"><a class="photo" href="#"><img class="img-fluid" src="/images/instagram/7.jpg" alt="" /></a></div>
+					<div class="col-3"><a class="photo" href="#"><img class="img-fluid" src="/images/instagram/8.jpg" alt="" /></a></div>
 				</div>
 			</div>
 		</div>
 	</div>
+
 	<footer class="site-footer bg-dark">
 		<div class="container">
 			<ul class="nav justify-content-center">
@@ -202,11 +176,10 @@
 				<li class="nav-item"><a class="nav-link" href="/dangnhap">Đăng nhập</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">Liên hệ</a></li>
 			</ul>
-			<div class="copy">
-				Bản quyền &copy; 2025 bởi Tên của bạn.
-			</div>
+			<div class="copy">Bản quyền &copy; 2026 bởi Nguyễn Hoàng Uy.</div>
 		</div>
 	</footer>
-	<script src="http://127.0.0.1:3000/js/app.js"></script>
+
+	<script src="/js/app.js?v=3"></script>
 </body>
 </html>
