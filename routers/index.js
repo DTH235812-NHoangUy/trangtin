@@ -6,7 +6,7 @@ var BaiViet = require('../models/baiviet');
 
 // GET: Trang chủ
 router.get('/', async (req, res) => {
-    // ĐÃ SỬA: Lấy chuyên mục hiển thị vào menu và sắp xếp A-Z
+    // Lấy chuyên mục hiển thị vào menu và sắp xếp A-Z
     var cm = await ChuDe.find().sort({ TenChuDe: 1 });
 
     // Lấy 12 bài viết mới nhất
@@ -38,7 +38,7 @@ router.get('/', async (req, res) => {
 router.get('/baiviet/chude/:id', async (req, res) => {
     var id = req.params.id;
 
-    // ĐÃ SỬA: Lấy chuyên mục hiển thị vào menu và sắp xếp A-Z
+    // Lấy chuyên mục hiển thị vào menu và sắp xếp A-Z
     var cm = await ChuDe.find().sort({ TenChuDe: 1 });
 
     // Lấy thông tin chủ đề hiện tại
@@ -74,7 +74,7 @@ router.get('/baiviet/chude/:id', async (req, res) => {
 router.get('/baiviet/chitiet/:id', async (req, res) => {
     var id = req.params.id;
 
-    // ĐÃ SỬA: Lấy chuyên mục hiển thị vào menu và sắp xếp A-Z
+    // Lấy chuyên mục hiển thị vào menu và sắp xếp A-Z
     var cm = await ChuDe.find().sort({ TenChuDe: 1 });
 
     // Lấy thông tin bài viết hiện tại
@@ -84,18 +84,30 @@ router.get('/baiviet/chitiet/:id', async (req, res) => {
         .exec();
 
     // =========================================================
-    // CODE MỚI: Xử lý tăng lượt xem 1 lần / 1 máy / 1 bài viết
+    // CODE MỚI: Xử lý tăng lượt xem CHỐNG F5 (1 máy / 1 bài / 1 lần)
     // =========================================================
-    var cookieName = 'da_xem_bai_' + id; // Tạo tên cookie riêng cho từng bài
     
-    // Nếu trình duyệt chưa có cookie này -> tức là chưa xem bài này
-    if (!req.cookies || !req.cookies[cookieName]) {
-        // 1. Tăng lượt xem trong Database
+    // Tự động phân tích Cookie từ trình duyệt gửi lên (không cần cài thêm thư viện)
+    var parsedCookies = {};
+    if (req.headers.cookie) {
+        req.headers.cookie.split(';').forEach(function(c) {
+            var parts = c.split('=');
+            if (parts.length >= 2) {
+                parsedCookies[parts[0].trim()] = parts[1].trim();
+            }
+        });
+    }
+
+    var cookieName = 'da_xem_bai_' + id; // Tạo tên cookie riêng cho bài viết này
+    
+    // Nếu trong trình duyệt của người dùng CHƯA CÓ cookie này
+    if (!parsedCookies[cookieName]) {
+        // 1. Thực hiện tăng lượt xem trong Database
         await BaiViet.findByIdAndUpdate(id, { $inc: { LuotXem: 1 } });
         
-        // 2. Gắn cookie vào trình duyệt máy khách (để lần sau F5 không tăng nữa)
-        // maxAge: Thời gian sống của cookie (ở đây set 1 ngày = 24 * 60 * 60 * 1000 ms)
-        res.cookie(cookieName, '1', { maxAge: 24 * 60 * 60 * 1000, httpOnly: true });
+        // 2. Gắn tem (cookie) vào trình duyệt máy đó để xác nhận đã xem. 
+        // maxAge được thiết lập là 10 năm (10 * 365 ngày), F5 thoải mái sẽ không tăng nữa.
+        res.cookie(cookieName, '1', { maxAge: 10 * 365 * 24 * 60 * 60 * 1000, httpOnly: true });
     }
     // =========================================================
 
